@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import random
 
 
 def cal_distance(vec1,vec2):
@@ -27,9 +28,25 @@ for index,row in edge_link.iterrows():
 
 weight_graph = generate_weight_graph(graph_array,max_id,2)
 avg_vec = np.average(weight_graph,axis=0)
-new_matrix = np.zeros((max_id,max_id))
+# new_matrix = np.zeros((max_id,max_id))
 for i in range(0,max_id):
-    new_matrix[i] = weight_graph[i]/avg_vec
+    weight_graph[i] = weight_graph[i]/weight_graph[i].sum()
+
+train=labels_res.sample(frac=0.05,random_state=200)
+test=labels_res.drop(train.index)
+
+for index,row in test.iterrows():
+    row[1] = random.randint(0,label_class-1)
+
+matrix = np.zeros((max_id,label_class))
+for index,row in train.iterrows():
+    matrix[index][row[1]] = 1
+
+for index,row in test.iterrows():
+    matrix[index][row[1]] = 1
+
+t_matrix = np.dot(weight_graph,matrix)
+#todo 
 
 if __name__ == '__main__':
     main()
