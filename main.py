@@ -73,7 +73,7 @@ def main(frac):
         if(count==0):
             break
     result = rand_index_score(label_true,label_predict)
-    print("Converge after %d iterations" %iter_count," Final Rand index score of frac %f"%frac,result)
+    # print("Converge after %d iterations" %iter_count," Final Rand index score of frac %f"%frac,result)
     return result
 # print(label_true)
 # print(label_predict)
@@ -93,8 +93,14 @@ def rand_index_score(clusters, classes):
 
 
 if __name__ == '__main__':
-    loop(0.05)
-    loop(0.10)
-    loop(0.15)
-    loop(0.20)
-    loop(0.25)
+    loop(0.30)
+    loop(0.35)
+    loop(0.40)
+    loop(0.45)
+    loop(0.50)
+    loop(0.55)
+    loop(0.60)
+    loop(0.65)
+    loop(0.70)
+    loop(0.75)
+    loop(0.80)

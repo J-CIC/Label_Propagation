@@ -15,8 +15,8 @@ for index,row in edge_link.iterrows():
     graph_array[row[0]][row[1]] = 1
     graph_array[row[1]][row[0]] = 1
 
-kmeans = KMeans(n_clusters=label_class).fit(graph_array)
-kmeans.labels_
+
+
 
 def rand_index_score(clusters, classes):
     tp_plus_fp = comb(np.bincount(clusters), 2).sum()
@@ -29,4 +29,16 @@ def rand_index_score(clusters, classes):
     tn = comb(len(A), 2) - tp - fp - fn
     return (tp + tn) / (tp + fp + fn + tn)
 
-print(rand_index_score(kmeans.labels_,labels_res[1]))
+def main():
+    kmeans = KMeans(n_clusters=label_class).fit(graph_array)
+    return rand_index_score(kmeans.labels_,labels_res[1])
+
+def loop():
+    sum = 0.0
+    for i in range(0,10):
+        sum = sum + main()
+    print("Average result  is  ",sum/10)
+
+if __name__ == '__main__':
+    loop()
+
